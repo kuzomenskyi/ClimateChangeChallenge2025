@@ -16,7 +16,7 @@ final class ListVM: ObservableObject {
     
     // MARK: Variable
     var cancellables: Set<AnyCancellable> = .init()
-    @Published var places: [Place] = [.marine, .rockefeller, .fireIsland]
+    @Published var places: [Place] = [.fireIsland, .rockefeller, .marine]
     @Published var placeSelected: Place? = nil
     
     // MARK: Private Variable

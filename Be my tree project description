@@ -3,16 +3,58 @@ Be my tree project description
 ## Inspiration
 What we do today affects our future. Every minute spend thinking on how we can make our environment better is valuable. This project is designed to make ourselves and others involved into the matter and do something for the nature which gave everything to us
 
+
+
 ## What it does
 It connects people who want to do meaningful impact on improving natural environment with a tool which allows them to do it with minimum effort creating shareable and memorable stories and supporting local national parks and creating domestic work places.
 
+
+
 ## How we built it
+Valeriia, my team member and a designer created some design for the app. I am as a software developer created something user can interact with on iPhone, iPad, MacOS
+
+
 
 ## Challenges we ran into
-Building customer's cart which takes long time
+Building the app itself takes long time. We already have a software developer and UI designer working in our team. But it will require more reaserchers and/or scientists to implement the solution
+
+The main problem was is to find sites which will be allowing everybody to come and plant trees on the site. But according to Department of Environmental Conservation (DEC) of New York State's programm called "New York’s 25 Million Trees", the DEC will be:
+* Expanding New York State tree seedling production and nursery capacity;
+* Educating people on the problem;
+* Providing new and continued funding opportunities for public and private landowners to plant new forests and increase tree canopy in urban communities; 
+What allows the project to actually happen.
+
+Also, three month ago NYC DEC did a grant program called Regenerate New York Forestry Cost Share Grant Program.
+
+https://dec.ny.gov/nature/forests-trees/private-forest-management/regenerate-new-york-grant-program
+
+So NYC government is concerned about the deforestation problem what creates a land for cooperation with investors to buy a land to plant a forest in who will be reimbursed by the NYC state, what makes searching funding for implementing this idea much more feasible in real life.
+
+
+Our second concern is that not every tree can be planted anywhere. Initially, we planned to allow customer to pick a tree customer wants to plant. But now, after attending a mentorship session with awesome mentor Shitangshu Roy, we changed the approach and will be narrowing the list of the types of trees which can be planted at the specific location to avoid invasive species being planted and to support the natural habitat of the trees according to the recommendations of Department of Environmental Conservation of New York State.
+
+
+https://dec.ny.gov/nature/forests-trees/climate-change/25-million-trees
+
 
 ## Accomplishments that we're proud of
+We are lucky to be in a team where we complement each other. We like the workshops attended and we got some good experience on researching market fit for the project etc. We are happy to spend our weekend thinking how to make this world a little bit better.
+
+
 
 ## What we learned
+We learned more 
 
-## What's next for Be my tree
+we learned more about systems and how to implement something that complements the system overall and fits into the system because of the system workshop attended. 
+
+We learned more on critical thinking related to the project on the mentorship session with Shitangshu Roy.
+
+We learned on how to make sure the project we implement has clear and logic answers to what, how and why questions related to the project goals, triggers, marketing angles and logical grounds of the project's existance, feasibility and practical value.
+
+
+
+## What's next for the Be my tree
+1. Accompanying NYC government's "25 million trees" program reaching out to prospect investors who are willing to buy a lend in the NYC state and apply for reimbursment from the NYC DEC
+2. Signing contracts with the investors to keep the trees planted by customers in place and have an employee in place to keep the stock of trees to be planted, the equipment required etc.
+3. Continuing developing the app keeping the limitations of specific locations and types of trees that can be planted in mind
+4. Deploying the app and marketing

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 final class PickerVM: ObservableObject {
-    struct Page: Identifiable {
+    struct Page: Identifiable, Equatable {
         let id: UUID = .init()
         let title: String
         let image: Image
@@ -32,26 +32,15 @@ final class PickerVM: ObservableObject {
     // MARK: Variable
     var cancellables: Set<AnyCancellable> = .init()
     @Published var selectedSliderTitle: String = "All"
-    @Published var places: [Place] = [.fireIsland, .marine, .rockefeller]
-    
-    @Published var selectedPlace: Place? = nil {
-        didSet {
-            page = selectedPlace == nil ? .pickLocation : .pickTree
-        }
-    }
-    
+    @Published var places: [Place] = [.rockefeller, .marine, .fireIsland]
+    @Published var preselectedOrder: TreeOrder? = nil
+    @Published var selectedPlace: Place? = nil
     @Published var preselectedPlace: Place? = nil
-    
-    @Published var treeOrder: TreeOrder? = nil {
-        didSet {
-            page = treeOrder == nil ? .pickTree : .pickLocation
-        }
-    }
-    
+    @Published var treeOrder: TreeOrder? = nil    
     @Published var selectedDate: Date? = nil
-    
     @Published var isSelectedPlaceAlertShown = false
     @Published var page: Page = .pickLocation
+    @Published var isSelectedOrderAlertShown = false
     
     @Published var trees: [Tree] = [
         .init(title: "Basswood", image: Image("Subject 2")),
@@ -65,6 +54,10 @@ final class PickerVM: ObservableObject {
         .init(title: "Mountain Alder", image: "Mountain Alder sm")
     ]
     
+    var treeAlertTitle: String {
+        return "Confirm adding \(preselectedOrder?.pcs ?? 0) \"\(preselectedOrder?.tree.title ?? "")\"?"
+    }
+    
     var title: String {
         page.title
     }
@@ -75,15 +68,15 @@ final class PickerVM: ObservableObject {
     }
     
     var isLocationSliderActive: Bool {
-        return selectedPlace == nil
+        return page == .pickLocation
     }
     
     var isTreeSliderActive: Bool {
-        return selectedPlace != nil
+        return page == .pickTree
     }
     
     var isDateSliderActive: Bool {
-        return treeOrder != nil
+        return page == .pickDate
     }
     
     // MARK: Private Variable

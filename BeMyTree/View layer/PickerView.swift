@@ -42,6 +42,13 @@ struct PickerView: View {
                     
                     if viewModel.isLocationSliderActive {
                         getLocationView()
+                    } else if viewModel.isDateSliderActive {
+                        VStack {
+                            Spacer()
+                                .frame(height: size.height * 0.1)
+                            Text("Pick a date")
+                            Spacer()
+                        }
                     } else {
                         getTreeView(forSize: size)
                     }
@@ -76,7 +83,21 @@ struct PickerView: View {
                 viewModel.isSelectedPlaceAlertShown = false
                 withAnimation {
                     viewModel.selectedPlace = viewModel.preselectedPlace
+                    viewModel.page = .pickTree
                 }
+            }, label: {
+                Text("Confirm")
+            })
+        }
+        .alert(viewModel.treeAlertTitle, isPresented: $viewModel.isSelectedOrderAlertShown) {
+            Button(action: {
+                viewModel.preselectedOrder = nil
+            }, label: {
+                Text("Cancel")
+            })
+            Button(action: {
+                viewModel.treeOrder = viewModel.preselectedOrder
+                viewModel.page = .pickDate
             }, label: {
                 Text("Confirm")
             })
@@ -103,7 +124,7 @@ struct PickerView: View {
     // MARK: Function
     
     // MARK: Private Function
-    private func getTreeView(forSize size: CGSize, completion: (() -> Void)? = nil) -> some View {
+    private func getTreeView(forSize size: CGSize) -> some View {
         VStack {
             Spacer()
                 .frame(height: 40)
@@ -111,7 +132,8 @@ struct PickerView: View {
                 VStack {
                     ForEach(viewModel.trees) { tree in
                         Button(action: {
-                            completion?()
+                            viewModel.preselectedOrder = .init(tree: tree, pcs: 1)
+                            viewModel.isSelectedOrderAlertShown = true
                         }, label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
