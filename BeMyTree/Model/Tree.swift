@@ -8,10 +8,18 @@
 import SwiftUI
 import Combine
 
-struct TreeOrder: Identifiable {
+struct Tree: Identifiable {
     let id: String = UUID().uuidString
     let title: String
     let image: Image
     
-    var pcs: Int
+    init(title: String, image: Image) {
+        self.title = title
+        self.image = image
+    }
+    
+    init(title: String, image: String) {
+        self.title = title
+        self.image = Image(image)
+    }
 }
