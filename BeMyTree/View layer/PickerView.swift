@@ -45,9 +45,9 @@ struct PickerView: View {
                         .frame(height: size.height * 0.4)
                     HStack {
                         Spacer()
-                        getSliderButton(withTitle: "Location", imageTitle: "place_location", isSelected: $viewModel.isLocationSliderActive)
-                        getSliderButton(withTitle: "Tree", imageTitle: "tree", isSelected: $viewModel.isTreeSliderActive)
-                        getSliderButton(withTitle: "Date", imageTitle: "calendar", isSelected: $viewModel.isDateSliderActive)
+                        getSliderButton(withTitle: "Location", imageTitle: "place_location", isSelected: viewModel.isLocationSliderActive)
+                        getSliderButton(withTitle: "Tree", imageTitle: "tree", isSelected: viewModel.isTreeSliderActive)
+                        getSliderButton(withTitle: "Date", imageTitle: "calendar", isSelected: viewModel.isDateSliderActive)
                         Spacer()
                     }
                     
@@ -154,7 +154,7 @@ struct PickerView: View {
         }
     }
     
-    private func getSliderButton(withTitle title: String, imageTitle: String, isSelected: Binding<Bool>) -> some View {
+    private func getSliderButton(withTitle title: String, imageTitle: String, isSelected: Bool) -> some View {
         let selectedColor = Color.black
         let deselectedColor = Color(hex: "908B85")
         return HStack {
@@ -172,7 +172,7 @@ struct PickerView: View {
                 Text(title)
                     .font(.system(size: 23))
             }
-            .foregroundStyle(Color(isSelected.wrappedValue ? selectedColor : deselectedColor))
+            .foregroundStyle(Color(isSelected ? selectedColor : deselectedColor))
             Spacer()
         }
     }
