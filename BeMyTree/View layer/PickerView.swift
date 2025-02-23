@@ -58,6 +58,21 @@ struct PickerView: View {
         .onAppear {
             viewModel.configure()
         }
+        .alert(viewModel.alertTitle, isPresented: $viewModel.isSelectedPlaceAlertShown) {
+            Button(action: {
+                viewModel.isSelectedPlaceAlertShown = false
+                withAnimation {
+                    viewModel.selectedPlace = nil
+                }
+            }, label: {
+                Text("Cancel")
+            })
+            Button(action: {
+                viewModel.isSelectedPlaceAlertShown = false
+            }, label: {
+                Text("Confirm")
+            })
+        }
     }
     
     // MARK: Private Variable
@@ -84,97 +99,109 @@ struct PickerView: View {
         ScrollView {
             VStack(spacing: 17) {
                 ForEach(viewModel.places) { place in
-                    ZStack {
-                        place.image
-                            .resizable()
-                            .frame(height: 200)
-                            .overlay {
+                    Button(action: {
+                        print("selected place: \(place.title)")
+                        withAnimation {
+                            viewModel.selectedPlace = place
+                        }
+                        viewModel.isSelectedPlaceAlertShown = true
+                    }, label: {
+                        ZStack {
+                            place.image
+                                .resizable()
+                                .frame(height: 200)
+                                .overlay {
+                                    VStack {
+                                        Spacer()
+                                        LinearGradient(colors: [Color.black.opacity(0.8), Color.clear], startPoint: .bottom, endPoint: .top)
+                                            .frame(height: 110)
+                                    }
+                                }
+                                .clipShape(
+                                    .rect(cornerRadius: 22)
+                                )
+                                .frame(height: 200)
+                                .padding(.horizontal, 15)
+                            
+                            HStack {
                                 VStack {
                                     Spacer()
-                                    LinearGradient(colors: [Color.black.opacity(0.8), Color.clear], startPoint: .bottom, endPoint: .top)
-                                        .frame(height: 110)
-                                }
-                            }
-                            .clipShape(
-                                .rect(cornerRadius: 22)
-                            )
-                            .frame(height: 200)
-                            .padding(.horizontal, 15)
-                        
-                        HStack {
-                            VStack {
-                                Spacer()
-                                Text(place.title)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(Color.white)
-                                    .shadow(radius: 2)
-                                .padding(.bottom, 20)
-                            }
-                            Spacer()
-                        }
-                        .padding(.horizontal, 32)
-                        
-                        VStack {
-                            Spacer()
-                                .frame(height: 12)
-                            HStack {
-                                HStack {
-                                    Image("location-pin")
-                                        .resizable()
-                                        .renderingMode(.template)
-                                        .frame(width: 20, height: 20)
-                                    Text(place.distanceString)
+                                    Text(place.title)
                                         .fontWeight(.semibold)
                                         .foregroundStyle(Color.white)
-                                        .shadow(radius: 5)
+                                        .shadow(radius: 2)
+                                        .padding(.bottom, 20)
                                 }
-                                .foregroundStyle(Color.white.opacity(0.9))
+                                Spacer()
+                            }
+                            .padding(.horizontal, 32)
+                            
+                            VStack {
+                                Spacer()
+                                    .frame(height: 12)
+                                HStack {
+                                    HStack {
+                                        Image("location-pin")
+                                            .resizable()
+                                            .renderingMode(.template)
+                                            .frame(width: 20, height: 20)
+                                        Text(place.distanceString)
+                                            .fontWeight(.semibold)
+                                            .foregroundStyle(Color.white)
+                                            .shadow(radius: 5)
+                                    }
+                                    .foregroundStyle(Color.white.opacity(0.9))
+                                    
+                                    Spacer()
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color(hex: "908B85").opacity(0.7))
+                                        Image("bookmark_empty")
+                                            .resizable()
+                                            .renderingMode(.template)
+                                            .foregroundStyle(Color.white.opacity(0.9))
+                                            .frame(width: 20, height: 20)
+                                            .offset(y: 2)
+                                    }
+                                    .frame(width: 40, height: 40)
+                                    
+                                }
+                                .padding(.horizontal, 30)
                                 
                                 Spacer()
-                                ZStack {
-                                    Circle()
-                                        .fill(Color(hex: "908B85").opacity(0.7))
-                                    Image("bookmark_empty")
-                                        .resizable()
-                                        .renderingMode(.template)
-                                        .foregroundStyle(Color.white.opacity(0.9))
-                                        .frame(width: 20, height: 20)
-                                        .offset(y: 2)
-                                }
-                                .frame(width: 40, height: 40)
-                                
                             }
-                            .padding(.horizontal, 30)
-                            
-                            Spacer()
                         }
-                    }
+                    })
                 }
             }
         }
     }
     
-    private func getSliderButton(withTitle title: String, imageTitle: String, isSelected: Bool) -> some View {
+    private func getSliderButton(withTitle title: String, imageTitle: String, isSelected: Bool, completion: (() -> Void)? = nil) -> some View {
         let selectedColor = Color.black
         let deselectedColor = Color(hex: "908B85")
-        return HStack {
-            Spacer()
-            VStack {
-                Circle()
-                    .frame(width: 38)
-                    .overlay {
-                        Image(imageTitle)
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundStyle(Color.white)
-                            .frame(width: 19, height: 19)
-                    }
-                Text(title)
-                    .font(.system(size: 23))
+        return Button(action: {
+            completion?()
+        }, label: {
+            HStack {
+                Spacer()
+                VStack {
+                    Circle()
+                        .frame(width: 38)
+                        .overlay {
+                            Image(imageTitle)
+                                .resizable()
+                                .renderingMode(.template)
+                                .foregroundStyle(Color.white)
+                                .frame(width: 19, height: 19)
+                        }
+                    Text(title)
+                        .font(.system(size: 23))
+                }
+                .foregroundStyle(Color(isSelected ? selectedColor : deselectedColor))
+                Spacer()
             }
-            .foregroundStyle(Color(isSelected ? selectedColor : deselectedColor))
-            Spacer()
-        }
+        })
     }
 }
 

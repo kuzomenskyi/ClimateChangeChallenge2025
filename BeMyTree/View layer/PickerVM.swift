@@ -21,17 +21,23 @@ final class PickerVM: ObservableObject {
     @Published var selectedPlace: Place? = nil
     @Published var treeOrder: TreeOrder? = nil
     @Published var selectedDate: Date? = nil
+    @Published var isSelectedPlaceAlertShown = false
+    
+    var alertTitle: String {
+        let placeTitle = selectedPlace?.title ?? ""
+        return "Select \"\(placeTitle)\"?"
+    }
     
     var isLocationSliderActive: Bool {
         return selectedPlace == nil
     }
     
     var isTreeSliderActive: Bool {
-        return treeOrder != nil
+        return selectedPlace != nil
     }
     
     var isDateSliderActive: Bool {
-        return selectedDate != nil
+        return treeOrder != nil
     }
     
     // MARK: Private Variable
