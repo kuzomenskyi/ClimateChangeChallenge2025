@@ -103,56 +103,57 @@ struct PickerView: View {
     // MARK: Function
     
     // MARK: Private Function
-    private func getTreeView(forSize size: CGSize) -> some View {
+    private func getTreeView(forSize size: CGSize, completion: (() -> Void)? = nil) -> some View {
         VStack {
             Spacer()
                 .frame(height: 40)
-            
             ScrollView {
                 VStack {
                     ForEach(viewModel.trees) { tree in
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundStyle(Color(hex: "#C0CCA4"))
-                                .offset(x: size.width * 0.15)
-                            HStack {
-                                tree.image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 90, height: 90)
-                                    .shadow(color: .black.opacity(0.35), radius: 40)
-                                Spacer()
-                            }
-                            .padding(.horizontal, 20)
-                            
-                            VStack(alignment: .leading) {
-                                Text(tree.title)
-                                    .foregroundStyle(Color(hex: "39452C"))
-                                    .font(.system(size: 20, weight: .regular))
-                            }
-                            .padding(.leading, size.width * 0.3)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 15)
-                            
-                            HStack {
-                                Spacer()
-                                ZStack {
-                                    Circle()
-                                        .frame(width: 55)
-                                        .foregroundStyle(Color(hex: "#606E52").opacity(0.8))
-                                    Image("plus")
+                        Button(action: {
+                            completion?()
+                        }, label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundStyle(Color(hex: "#C0CCA4"))
+                                    .offset(x: size.width * 0.15)
+                                HStack {
+                                    tree.image
                                         .resizable()
-                                        .renderingMode(.template)
-                                        .foregroundStyle(Color.white.opacity(0.8))
-                                        .frame(width: 30, height: 30)
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 90, height: 90)
+                                        .shadow(color: .black.opacity(0.35), radius: 40)
+                                    Spacer()
+                                }
+                                .padding(.horizontal, 20)
+                                
+                                VStack(alignment: .leading) {
+                                    Text(tree.title)
+                                        .foregroundStyle(Color(hex: "39452C"))
+                                        .font(.system(size: 20, weight: .regular))
+                                }
+                                .padding(.leading, size.width * 0.3)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 5)
+                                
+                                HStack {
+                                    Spacer()
+                                    ZStack {
+                                        Circle()
+                                            .frame(width: 55)
+                                            .foregroundStyle(Color(hex: "#606E52").opacity(0.8))
+                                        Image("plus")
+                                            .resizable()
+                                            .renderingMode(.template)
+                                            .foregroundStyle(Color.white.opacity(0.8))
+                                            .frame(width: 30, height: 30)
+                                    }
                                 }
                             }
-                        }
-                        .frame(height: 120)
-                        .padding(.horizontal, 15)
-                        
+                            .frame(height: 120)
+                            .padding(.horizontal, 15)
+                        })
                     }
-                    
                     Spacer()
                         .frame(height: 100)
                 }
@@ -160,6 +161,7 @@ struct PickerView: View {
             .offset(y: 25)
             Spacer()
         }
+        
     }
     
     private func getLocationView() -> some View {

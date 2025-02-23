@@ -57,10 +57,10 @@ final class PickerVM: ObservableObject {
         .init(title: "Basswood", image: Image("Subject 2")),
         .init(title: "American Holly", image: Image("american_holly")),
         .init(title: "Arizona Cypress", image: Image("Arizona Cypress sm")),
-        .init(title: "Crabapple", image: Image("Crabapple")),
+        .init(title: "Little Gem Magnolia", image: Image("Little Gem Magnolia")),
         .init(title: "Florida Mapple", image: "Florida Mapple sm"),
         .init(title: "Gray Oak", image: Image("Gray Oak")),
-        .init(title: "Little Gem Magnolia", image: Image("Little Gem Magnolia")),
+        .init(title: "Crabapple", image: Image("Crabapple")),
         .init(title: "Western Redbud", image: "Western Redbud sm"),
         .init(title: "Mountain Alder", image: "Mountain Alder sm")
     ]
