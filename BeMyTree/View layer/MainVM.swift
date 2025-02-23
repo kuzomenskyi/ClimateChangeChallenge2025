@@ -9,6 +9,11 @@ import SwiftUI
 import Combine
 
 final class MainVM: ObservableObject {
+    enum Route {
+        case plantATree
+        case none
+    }
+    
     // MARK: Constant
     static let mock: MainVM = .init()
     
@@ -16,6 +21,7 @@ final class MainVM: ObservableObject {
     
     // MARK: Variable
     var cancellables: Set<AnyCancellable> = .init()
+    @Published var route: Route = .none
     
     // MARK: Private Variable
     private(set) var onAppearBlock: ((_ viewModel: MainVM) -> Void)?

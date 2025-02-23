@@ -18,69 +18,73 @@ struct MainView: View {
     var body: some View {
         GeometryReader { geometry in
             let size = geometry.size
-            Group {
-                ZStack {
-                    getForestImage(forGeometry: geometry)
-                    
-                    VStack {
-                        HStack {
-                            Button(action: {}, label: {
-                                Image("burger")
-                                    .renderingMode(.template)
-                                    .resizable()
-                                    .foregroundStyle(Color.white)
-                            })
-                            .frame(width: 30, height: 27)
-                            
-                            Text("Be my tree".uppercased())
-                                .font(.system(size: 25))
-                                .padding(.leading, 10)
-                                .foregroundStyle(Color.white)
-                            
-                            Spacer()
-                        }
-                        
-                        HStack {
-                            Spacer()
-                                .frame(width: 20)
-                            Text("Stop deforestation today")
-                                .italic()
-                                .foregroundStyle(Color.white)
-                                .opacity(0.8)
-                            Spacer()
-                        }
-                        .padding(.top, 5)
-                        
-                        Spacer()
-                            .frame(height: 40)
-                        
-                        getPlantTreeBtn()
+            if viewModel.route == .none {
+                Group {
+                    ZStack {
+                        getForestImage(forGeometry: geometry)
                         
                         VStack {
                             HStack {
-                                getMenuBtn(forSize: size, withTitle: "Maps", image: Image("location-pin")) {
-                                    print("maps tapped")
-                                }
-                                getMenuBtn(forSize: size, withTitle: "Calendar", image: Image("calendar")) {
-                                    print("calendar tapped")
-                                }
+                                Button(action: {}, label: {
+                                    Image("burger")
+                                        .renderingMode(.template)
+                                        .resizable()
+                                        .foregroundStyle(Color.white)
+                                })
+                                .frame(width: 30, height: 27)
+                                
+                                Text("Be my tree".uppercased())
+                                    .font(.system(size: 25))
+                                    .padding(.leading, 10)
+                                    .foregroundStyle(Color.white)
+                                
+                                Spacer()
                             }
+                            
                             HStack {
-                                getMenuBtn(forSize: size, withTitle: "About us", image: Image("group")) {
-                                    print("about us tapped")
+                                Spacer()
+                                    .frame(width: 20)
+                                Text("Stop deforestation today")
+                                    .italic()
+                                    .foregroundStyle(Color.white)
+                                    .opacity(0.8)
+                                Spacer()
+                            }
+                            .padding(.top, 5)
+                            
+                            Spacer()
+                                .frame(height: 40)
+                            
+                            getPlantTreeBtn()
+                            
+                            VStack {
+                                HStack {
+                                    getMenuBtn(forSize: size, withTitle: "Maps", image: Image("location-pin")) {
+                                        print("maps tapped")
+                                    }
+                                    getMenuBtn(forSize: size, withTitle: "Calendar", image: Image("calendar")) {
+                                        print("calendar tapped")
+                                    }
                                 }
-                                getMenuBtn(forSize: size, withTitle: "Favourites", image: Image("bookmark")) {
-                                    print("bookmarks tapped")
+                                HStack {
+                                    getMenuBtn(forSize: size, withTitle: "About us", image: Image("group")) {
+                                        print("about us tapped")
+                                    }
+                                    getMenuBtn(forSize: size, withTitle: "Favourites", image: Image("bookmark")) {
+                                        print("bookmarks tapped")
+                                    }
                                 }
                             }
+                            .padding(.top, 90)
+                            
+                            Spacer()
+                            
                         }
-                        .padding(.top, 90)
-                        
-                        Spacer()
-                        
+                        .padding([.horizontal, .vertical], 15)
                     }
-                    .padding([.horizontal, .vertical], 15)
                 }
+            } else if viewModel.route == .plantATree {
+                PickerView(viewModel: pickerVM)
             }
         }
         .onAppear {
@@ -90,6 +94,7 @@ struct MainView: View {
     
     // MARK: Private Variable
     @StateObject private var viewModel: MainVM
+    @StateObject private var pickerVM: PickerVM = .init()
     
     // MARK: Init
     init(viewModel: MainVM) {
@@ -152,7 +157,9 @@ struct MainView: View {
         HStack {
             Spacer()
                 .frame(width: 20)
-            Button(action: {}, label: {
+            Button(action: {
+                viewModel.route = .plantATree
+            }, label: {
                 HStack {
                     Spacer()
                     VStack {
