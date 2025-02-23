@@ -43,12 +43,7 @@ struct PickerView: View {
                     if viewModel.isLocationSliderActive {
                         getLocationView()
                     } else if viewModel.isDateSliderActive {
-                        VStack {
-                            Spacer()
-                                .frame(height: size.height * 0.1)
-                            Text("Pick a date")
-                            Spacer()
-                        }
+                        getDateView(forSize: size)
                     } else {
                         getTreeView(forSize: size)
                     }
@@ -124,6 +119,41 @@ struct PickerView: View {
     // MARK: Function
     
     // MARK: Private Function
+    private func getDateView(forSize size: CGSize) -> some View {
+        VStack {
+            Spacer()
+                .frame(height: size.height * 0.1)
+            Text("Schedule your appointment")
+            
+            Spacer()
+                .frame(height: 30)
+            DatePicker(selection: $viewModel.selectedDate, in: Date.now..., displayedComponents: .date) {
+                Text("Select a date")
+            }
+            .onChange(of: viewModel.selectedDate) { oldValue, newValue in
+                withAnimation {
+                    viewModel.isConfirmButtonEnabled = true
+                }
+            }
+            
+            Spacer()
+            Button(action: {}, label: {
+                ZStack {
+                    Capsule()
+                    Text("Confirm")
+                        .foregroundStyle(Color.white)
+                }
+            })
+            .buttonStyle(.plain)
+            .disabled(!viewModel.isConfirmButtonEnabled)
+            .frame(height: 70)
+            
+            Spacer()
+                .frame(height: 50)
+        }
+        .padding(.horizontal, 20)
+    }
+    
     private func getTreeView(forSize size: CGSize) -> some View {
         VStack {
             Spacer()

@@ -37,10 +37,11 @@ final class PickerVM: ObservableObject {
     @Published var selectedPlace: Place? = nil
     @Published var preselectedPlace: Place? = nil
     @Published var treeOrder: TreeOrder? = nil    
-    @Published var selectedDate: Date? = nil
+    @Published var selectedDate: Date = .now
     @Published var isSelectedPlaceAlertShown = false
     @Published var page: Page = .pickLocation
     @Published var isSelectedOrderAlertShown = false
+    @Published var isConfirmButtonEnabled = false
     
     @Published var trees: [Tree] = [
         .init(title: "Basswood", image: Image("Subject 2")),
