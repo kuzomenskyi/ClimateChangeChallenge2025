@@ -27,11 +27,11 @@ final class PickerVM: ObservableObject {
     }
     
     var isTreeSliderActive: Bool {
-        return treeOrder == nil
+        return treeOrder != nil
     }
     
     var isDateSliderActive: Bool {
-        return selectedDate == nil
+        return selectedDate != nil
     }
     
     // MARK: Private Variable
