@@ -4,10 +4,12 @@ Be my tree project description
 What we do today affects our future. Every minute spend thinking on how we can make our environment better is valuable. This project is designed to make ourselves and others involved into the matter and do something for the nature which gave everything to us
 
 
-
 ## What it does
-It connects people who want to do meaningful impact on improving natural environment with a tool which allows them to do it with minimum effort creating shareable and memorable stories and supporting local national parks and creating domestic work places.
+Our mission is to provide good people a way to do a good deed as simple as possible. Customer downloads the app, picks place nearby out of list of local parks or property of non-profit organizations, or just any citizen we have a contract with. Then a customer picks a tree out of selected species that will be beneficial to the environment of the specific location. Then, customer schedules an appointment with the location's'manager, pays for the visit and plants the tree by own hands once arrived. The plant itself and the equipment required will be provided by the location's manager
 
+The tree planted by the customer will be tagged with the name of the person or people  who planted it, making this event memorable to others.
+
+This process connects people who want to do meaningful impact on improving natural environment with a tool which allows them to do it with minimum effort creating shareable and memorable stories and supporting local organizations and creating domestic work places.
 
 
 ## How we built it
@@ -24,6 +26,8 @@ The main problem was is to find sites which will be allowing everybody to come a
 * Providing new and continued funding opportunities for public and private landowners to plant new forests and increase tree canopy in urban communities; 
 What allows the project to actually happen.
 
+https://dec.ny.gov/nature/forests-trees/climate-change/25-million-trees
+
 Also, three month ago NYC DEC did a grant program called Regenerate New York Forestry Cost Share Grant Program.
 
 https://dec.ny.gov/nature/forests-trees/private-forest-management/regenerate-new-york-grant-program
@@ -33,8 +37,7 @@ So NYC government is concerned about the deforestation problem what creates a la
 
 Our second concern is that not every tree can be planted anywhere. Initially, we planned to allow customer to pick a tree customer wants to plant. But now, after attending a mentorship session with awesome mentor Shitangshu Roy, we changed the approach and will be narrowing the list of the types of trees which can be planted at the specific location to avoid invasive species being planted and to support the natural habitat of the trees according to the recommendations of Department of Environmental Conservation of New York State.
 
-
-https://dec.ny.gov/nature/forests-trees/climate-change/25-million-trees
+Also, further development of the app and scaling will lead to intoducing more cloud technologies into the app. Which in turn means servers somewhere will be rented in order to support the app's operations. And those servers are not guaranteed to be supplied by green energy, which is another concern we would think about.
 
 
 ## Accomplishments that we're proud of
